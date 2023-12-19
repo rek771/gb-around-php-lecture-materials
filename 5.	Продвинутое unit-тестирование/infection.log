@@ -1,0 +1,132 @@
+Escaped mutants:
+================
+
+1) /home/occur/PhpstormProjects/gb_l5/74/src/FakeFreelanceMoneyCollector.php:10    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+     private int $sum;
+     public function __construct()
+     {
+-        $this->sum = 0;
++        $this->sum = -1;
+     }
+     public function earnMoney(float $amount) : void
+     {
+
+
+2) /home/occur/PhpstormProjects/gb_l5/74/src/FreelanceMoneyCollector.php:29    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+     public function withdrawMoney() : string
+     {
+         $result = $this->prepareResultString();
+-        $this->totalEarnings = 0;
++        $this->totalEarnings = -1;
+         return $result;
+     }
+     private function prepareResultString() : string
+
+
+3) /home/occur/PhpstormProjects/gb_l5/74/src/FreelanceMoneyCollector.php:35    [M] GreaterThan
+
+--- Original
++++ New
+@@ @@
+     }
+     private function prepareResultString() : string
+     {
+-        if ($this->totalEarnings > 1000000) {
++        if ($this->totalEarnings >= 1000000) {
+             throw new Exception("{$this->name} заработал слишком много денег!");
+         }
+         return "{$this->name} заработал {$this->totalEarnings} руб. на фрилансе.";
+     }
+ }
+
+
+4) /home/occur/PhpstormProjects/gb_l5/74/src/Worker.php:10    [M] DecrementInteger
+
+--- Original
++++ New
+@@ @@
+ {
+     private FreelanceMoneyCollectorInterface $collector;
+     private int $salaryPerHour;
+-    public function __construct(FreelanceMoneyCollectorInterface $collector, int $salaryPerHour = 100)
++    public function __construct(FreelanceMoneyCollectorInterface $collector, int $salaryPerHour = 99)
+     {
+         $this->collector = $collector;
+         $this->salaryPerHour = $salaryPerHour;
+
+
+5) /home/occur/PhpstormProjects/gb_l5/74/src/Worker.php:10    [M] IncrementInteger
+
+--- Original
++++ New
+@@ @@
+ {
+     private FreelanceMoneyCollectorInterface $collector;
+     private int $salaryPerHour;
+-    public function __construct(FreelanceMoneyCollectorInterface $collector, int $salaryPerHour = 100)
++    public function __construct(FreelanceMoneyCollectorInterface $collector, int $salaryPerHour = 101)
+     {
+         $this->collector = $collector;
+         $this->salaryPerHour = $salaryPerHour;
+
+
+6) /home/occur/PhpstormProjects/gb_l5/74/src/Worker.php:18    [M] Multiplication
+
+--- Original
++++ New
+@@ @@
+     }
+     public function work(int $hours)
+     {
+-        $this->collector->earnMoney($this->salaryPerHour * $hours);
++        $this->collector->earnMoney($this->salaryPerHour / $hours);
+     }
+     public function goHome() : string
+     {
+
+
+Timed Out mutants:
+==================
+
+Skipped mutants:
+================
+
+Not Covered mutants:
+====================
+
+1) /home/occur/PhpstormProjects/gb_l5/74/src/FakeFreelanceMoneyCollector.php:15    [M] Plus
+
+--- Original
++++ New
+@@ @@
+     }
+     public function earnMoney(float $amount) : void
+     {
+-        $this->sum = $this->sum + $amount;
++        $this->sum = $this->sum - $amount;
+     }
+     public function withdrawMoney() : string
+     {
+
+
+2) /home/occur/PhpstormProjects/gb_l5/74/src/FreelanceMoneyCollector.php:20    [M] Throw_
+
+--- Original
++++ New
+@@ @@
+     public function earnMoney(float $amount) : void
+     {
+         if ($amount < 0) {
+-            throw new Exception("Заработок не может быть отрицательным.");
++            new Exception("Заработок не может быть отрицательным.");
+         }
+         $this->totalEarnings += $amount;
+     }
