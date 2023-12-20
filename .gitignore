@@ -2,3 +2,4 @@ vendor
 *.bak
 *.zip
 *.cache
+.idea
